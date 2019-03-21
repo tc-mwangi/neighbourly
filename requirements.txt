@@ -1,3 +1,4 @@
 Django==1.11.17
+django-tinymce==2.8.0
 pep8==1.7.1
 pytz==2018.9
