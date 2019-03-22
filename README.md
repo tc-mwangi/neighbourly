@@ -20,7 +20,7 @@ OS X
 
 * Clone the app to a directory.
 ```
-git clone https://github.com/tc-mwangi/tuzwa-app.git
+git clone https://github.com/tc-mwangi/neighbourly.git
 ```
 
 * Build Locally
@@ -65,7 +65,7 @@ Then visit http://localhost:8000 to view the app.
 
 ## Authors
 
-* **Lose Mwangi** - *Initial work* - [archigram](https://github.com/tc-mwangi/tuzwa-app.git)
+* **Lose Mwangi** - *Initial work* - [neighbourly](https://github.com/tc-mwangi/neighbourly.git)
 
 
 ## License
