@@ -43,12 +43,13 @@ Then visit http://localhost:8000 to view the app.
 
 * **As a User** I would like to:
 
-* Post a project to be reviewed/rated.
-* View posted projects details.
-* Search for projects.
-* View Projects Overall Score.
-* Rate/Review Projects.
-* View User Profile Page
+* Sign in with the application
+* Set up a profile with general location and neighbourhood name
+* Find a listing of different businesses in my neighbourhood
+* Find contact information of Police and Health services
+* Create Posts visible to members of the neibourhood.
+* Change Neighbourhood when I decide to move out.
+* Only view details of a single neighbourhood.
 
 
 ### BDD
@@ -56,11 +57,10 @@ Then visit http://localhost:8000 to view the app.
 |--- | ---         |     ---      |          --- |
 |  1. | login registered User |  display login form   | redirect user to their profile page  |
 |  2. | sign up new User | display sign up form   | save user details, redirect to signup, redirect to login after signup |
-|  3. | enable image uploads |  display image uploads form  |  save, display image on user's timeline and also on timeline  |
-|  4. | enable profile photo upload | display upload form|  redirect to profile page after post |
-|  5. | follow or unfolow other users |  display navigation options to view followers and following  | add or subtract to number of followers, diplay following  posts on users timeline  |
-|  6. | like a post |  display like button  | add or subtract to likes counter |
-|  7. | comment on a post |  display comment form  | display comment feed  |
+|  3. | enable edit profile |  display edit profile form  |  save, display changes on user's profile page and also on timeline  |
+|  4. | see listing of neighbourhood businesses| |  display list of businesses and their contact details |
+|  5. | post on the neighbourhood thread |  display post form  | update neighbourhood thread |
+
 
 
 ## Authors

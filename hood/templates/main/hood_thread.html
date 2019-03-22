@@ -1,0 +1,16 @@
+{%extends 'shared/base.html'%}
+{% load static%}
+
+{%block content%}
+
+{{block.super}}
+
+
+
+
+{% for activity in activities %}
+{%render_activity activity%}
+
+{%endfor%}
+
+{%endblock%}

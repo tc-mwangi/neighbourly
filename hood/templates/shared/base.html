@@ -1,0 +1,87 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Import Google Icon Font-->
+    
+    <!-- Required styles for MDC Web -->
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+
+    
+    <!-- favicon -->
+    <link rel="icon" href="{%static 'favicon.ico'%}">
+
+    {% if title %}
+    <title>neibourly - {{title}}</title>
+    {% else %}
+    <title> neibourly - know thy neighbour </title>
+    {% endif %}
+
+    
+    {% block styles %}
+    
+
+    <!-- CSS  -->
+    
+    <link href="{% static 'css/styles.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/base.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+
+
+    <!-- FONTS -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   
+    {% endblock %}
+
+    </head>
+<body>
+{%include 'shared/navigation.html'%}
+
+{% block content %}  {%endblock%}
+
+{% block scripts %}
+    <!-- JavaScript -->
+    <!-- Required MDC Web JavaScript library -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <!-- Instantiate single textfield component rendered in the document -->
+    <script>
+        mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+    </script>
+    <!-- Custom JavaScript -->
+    
+    <script src="{% static 'js/scripts.js'%}"></script>
+    
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Render textfield component -->
+<div class="mdc-text-field">
+  <input type="text" id="my-text-field" class="mdc-text-field__input">
+  <label class="mdc-floating-label" for="my-text-field">Label</label>
+  <div class="mdc-line-ripple"></div>
+</div>
+
