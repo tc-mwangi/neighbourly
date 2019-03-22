@@ -163,7 +163,7 @@ class Business(models.Model):
 
 
 # indicate which models should be shared
-class Pin(Activity, models.Model):
+# class Pin(Activity, models.Model):
     
 
 

@@ -6,24 +6,14 @@
 {{block.super}}
 
 
-
-
-<h6 class="mdc-typography mdc-typography--headline6 demo-headline">MDC Web Quick Start</h6>
-
-<div class="mdc-text-field">
-  <input type="text" id="my-text-field" class="mdc-text-field__input first-name-input">
-  <label class="mdc-floating-label" for="my-text-field">First name</label>
-  <div class="mdc-line-ripple"></div>
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell"><h1 id="main_logo">hood</h1></div>
+    <div class="mdc-layout-grid__cell"></div>
+    <div class="mdc-layout-grid__cell"></div>
+  </div>
 </div>
 
-<div class="mdc-text-field">
-  <input type="text" id="my-text-field" class="mdc-text-field__input last-name-input">
-  <label class="mdc-floating-label" for="my-text-field" >Last name</label>
-  <div class="mdc-line-ripple"></div>
-</div>
-<button class="mdc-button greet-button">Greet</button>
-
-<div class="mdc-typography mdc-typography--overline greet-message"></div>
 
 
 {%endblock%}
