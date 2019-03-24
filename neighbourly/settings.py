@@ -56,6 +56,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap4'
     'stream_django',
     'hood',
     'rest_framework',

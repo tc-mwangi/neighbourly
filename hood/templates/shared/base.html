@@ -9,18 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <!--Import Google Icon Font-->
-    
-    <!-- Required styles for MDC Web -->
-    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css'%}"  media="screen,projection"/>
     <!-- favicon -->
     <link rel="icon" href="{%static 'favicon.ico'%}">
 
     {% if title %}
-    <title>neibourly - {{title}}</title>
+    <title>hood - {{title}}</title>
     {% else %}
-    <title> neibourly - know thy neighbour </title>
+    <title> hood </title>
     {% endif %}
 
     
@@ -28,7 +26,8 @@
     
 
     <!-- CSS  -->
-    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/orkney" type="text/css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{% static 'css/styles.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{% static 'css/base.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
@@ -48,16 +47,12 @@
 
 {% block scripts %}
     <!-- JavaScript -->
-    <!-- Required MDC Web JavaScript library -->
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <!-- Instantiate single textfield component rendered in the document -->
-    <script>
-        mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-    </script>
-    <!-- Custom JavaScript -->
-    
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{% static 'js/materialize.js'%}"></script>
+    <script src="{% static 'js/init.js'%}"></script>
     <script src="{% static 'js/scripts.js'%}"></script>
     
+
 {% endblock %}
 
 
@@ -77,11 +72,4 @@
 
 
 
-
-<!-- Render textfield component -->
-<div class="mdc-text-field">
-  <input type="text" id="my-text-field" class="mdc-text-field__input">
-  <label class="mdc-floating-label" for="my-text-field">Label</label>
-  <div class="mdc-line-ripple"></div>
-</div>
 
