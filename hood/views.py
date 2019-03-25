@@ -4,6 +4,7 @@ from .models import Hood, Profile, Business, UpdateHood, Post
 from .forms import EditProfileForm, ChangeHoodForm, AddBusinessForm, PostForm
 from django.contrib.auth.decorators import login_required
 import datetime as dt
+from django.contrib.auth.models import User
 
 
 
@@ -50,15 +51,29 @@ def edit_profile(request):
 
 
 @login_required(login_url='/accounts/login/')
-def user_profile(request):
+def user_profile(request, username):
     '''display user profile info
 
     Arguments:
         request {[type]} -- [description]
     '''
+    profile=User.objects.get(username=username)
+    try:
+        profile_details = Profile.get_user_profile(profile.id)
+    except:
+        profile_details = Profile.filter_by_id(profile.id)
+        # business = Business.get_profile_business(profile.id)
+        title = f'Welcome {profile.username}'
     
 
-    return render(request, 'main/profile.html', {})
+    return render(request, 'main/profile.html', {'title':title, 'profile':profile, 'profile_details':profile_details})
+
+
+
+
+
+
+
 
 
 @login_required(login_url='/accounts/login/')

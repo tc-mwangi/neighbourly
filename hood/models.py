@@ -92,7 +92,7 @@ class Business(models.Model):
         return business
 
     @classmethod
-    def get_neighborhood_businesses(cls, hood_id):
+    def get_neighborhood_business(cls, hood_id):
         business = Business.objects.filter(hood_id=id)
         return business
 
@@ -102,7 +102,7 @@ class Business(models.Model):
         return business
 
     @classmethod
-    def get_profile_businesses(cls, profile):
+    def get_profile_business(cls, profile):
         business = Business.objects.filter(biz_owner__pk=profile)
         return business
 

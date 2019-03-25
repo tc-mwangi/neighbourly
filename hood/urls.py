@@ -8,6 +8,7 @@ urlpatterns=[
     url('^$',views.landing, name='landing'),
     url('^home/$',views.index, name='index'),
     url('^edit/',views.edit_profile, name='edit_profile'),
+    url(r'^user/(?P<username>\w+)', views.user_profile, name='user_profile'),
     url('^profile/',views.user_profile, name='user_profile'),
     url('^add_business/',views.add_business, name='add_business'),
     url('^search/',views.search_business, name='search_business'),
@@ -20,4 +21,7 @@ urlpatterns=[
 
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
+  
 
