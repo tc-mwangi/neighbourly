@@ -52,23 +52,14 @@ def edit_profile(request):
 
 @login_required(login_url='/accounts/login/')
 def user_profile(request, username):
-    '''display user profile info
-
-    Arguments:
-        request {[type]} -- [description]
-    '''
-    profile=User.objects.get(username=username)
+    profile = User.objects.get(username=username)
     try:
-        profile_details = Profile.get_user_profile(profile.id)
+        profile_info = Profile.get_profile(profile.id)
     except:
-        profile_details = Profile.filter_by_id(profile.id)
-        # business = Business.get_profile_business(profile.id)
-        title = f'Welcome {profile.username}'
-    
-
-    return render(request, 'main/profile.html', {'title':title, 'profile':profile, 'profile_details':profile_details})
-
-
+        profile_info = Profile.filter_by_id(profile.id)
+    business = Business.get_profile_business(profile.id)
+    title = f'@{profile.username}'
+    return render(request, 'main/profile.html', {'title': title, 'profile': profile, 'profile_info': profile_info, 'business': business})
 
 
 
@@ -127,6 +118,16 @@ def hood_info(request):
 
     return render(request, 'main/hood_info.html', {})
 
+
+
+
+
+
+
+
+
+
+
 @login_required(login_url='/accounts/login')
 def hood_thread(request):
     '''displays neighbourhood business listings
@@ -140,20 +141,21 @@ def hood_thread(request):
     return render(request, 'main/hood_thread.html', {})
 
 
-@login_required
-def feed(request):
-    '''
-    Items pinned by the people you follow
-    '''
-    enricher = Enrich(request.user)
-    context = RequestContext(request)
-    feed = feed_manager.get_news_feeds(request.user.id)['timeline']
-    if request.POST.get('delete'):
-        feed.delete()
-    activities = feed.get(limit=25)['results']
-    context['activities'] = enricher.enrich_activities(activities)
-    response = render_to_response('main/feed.html', context)
-    return response
+@login_required(login_url='/accounts/login/')
+def add_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.poster = current_user
+            post.post_hood = request.user.join.hood_id
+            post.save()
+        return redirect('homepage')
+
+    else:
+        form = PostForm()
+    return render(request, 'mail/add_post.html', {"form": form})
 
 
 
