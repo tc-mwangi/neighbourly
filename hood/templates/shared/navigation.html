@@ -2,83 +2,54 @@
 
 {%block content%}
 {{block.supper}}
-   
-   <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <img href="{% url 'index' %}" src="{%static 'logo.png'%}" alt="logo" id="logo-container" class="brand-logo" height="40">
-     
-        {% if user.is_authenticated %}   
-      <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="/accounts/login">Register/Login</a></li>
-        <li><a href="{% url 'user_profile' %}">Profile</a></li>
-        <li><a href="/admin">Admin</a></li>
-        <li><a href="{% url 'user_profile' %}">Profile</a></li>
-        <li><a href="{% url 'business_listing' %}">Listing</a></li>
-        <li><a href="{% url 'auth_logout' %}">Logout</a></li>
-      </ul>
-      <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons amber-text sidenav-close"></i>Menu</a>
-      <ul id="slide-out" class="sidenav" >
-          <li><div class="user-view">
-            <div class="background">
-              <img src="https://images.unsplash.com/photo-1429892494097-cccc61109f58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-            </div>
-            <a href="#user"><img class="circle" src="https://images.unsplash.com/photo-1506634572416-48cdfe530110?"></a>
-            <a href="#name"><span class="amber-text name">profile.username</span></a>
-            <a href="#email"><span class="amber-text email">profile.email</span></a>
-          </div></li>
-          <li><a href="/admin"><i class="material-icons">cloud</i>Admin</a></li>
-          <li><div class="divider"></div></li>        
-          <li><a href="{% url 'business_listing' %}"><i class="material-icons">cloud</i>Listing</a></li>
-          <li><div class="divider"></div></li>
-          <li><a href="{% url 'user_profile' %}"><i class="material-icons">cloud</i>Profile</a></li>
-          <li><div class="divider"></div></li>
-          <li><a href="{% url 'auth_logout' %}"><i class="material-icons">cloud</i>Logout</a></li> 
-        </ul>
-        {% else %}
-        <ul class="right hide-on-med-and-down">
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="/accounts/login">Register/Login</a></li>
-            <li><a href="/admin">Admin</a></li>         
-          </ul>
-          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons amber-text sidenav-close"></i>Menu</a>
-          <ul id="slide-out" class="sidenav" >
-              <li><div class="user-view">
-                <div class="background">
-                  <img src="https://images.unsplash.com/photo-1429892494097-cccc61109f58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                </div>
-                <a href="#user"><img class="circle" src="https://images.unsplash.com/photo-1506634572416-48cdfe530110?"></a>
-                <a href="#name"><span class="amber-text name">visitor</span></a>
-                <a href="#email"><span class="amber-text email">visitor</span></a>
-              </div></li>
-              <li><a href="/admin"><i class="material-icons">cloud</i>Admin</a></li>
-              <li><div class="divider"></div></li>   
-              <li><a href="/accounts/login"><i class="material-icons">cloud</i>Register/Login</a></li>
-              <li><div class="divider"></div></li>       
 
+<nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a href="{% url 'index' %}" class="navbar-brand"><img src="{%static 'logo.png'%}" alt="hood">hood</a>       
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/accounts/login">
+                  Login/Register
+                </a>
+              </li>
+              {% if user.is_authenticated %} 
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_profile' %}">
+                  Profile
+                </a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="#pricing">
+                  Pricing
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">
+                    Admin
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'auth_logout' %}">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-
-
-
-
-
-
-        {% endif %}
-       
-
-      <ul id="slide-out" class="sidenav">
-          <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
-      </ul>
-       
-    
-            
-     
-    </div>
-  </nav>
-
-
-  {%endblock%}
-
+{%endblock%}
 
 
 
