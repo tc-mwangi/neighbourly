@@ -56,7 +56,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap4'
+    'bootstrap4',
     'stream_django',
     'hood',
     'rest_framework',
@@ -159,7 +159,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = '/user_profile'
+LOGIN_REDIRECT_URL = '/hood_thread'
 # LOGIN_URL = '/all_submissions'
 
 LOGOUT_REDIRECT_URL = '/'
@@ -170,3 +170,5 @@ STAR_RATINGS_RANGE = 10
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
+
+

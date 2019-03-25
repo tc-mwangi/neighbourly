@@ -5,7 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-    url('^$',views.index, name='index'),
+    url('^$',views.landing, name='landing'),
+    url('^home/$',views.index, name='index'),
     url('^edit/',views.edit_profile, name='edit_profile'),
     url('^profile/',views.user_profile, name='user_profile'),
     url('^search/',views.search_business, name='search_business'),

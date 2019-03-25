@@ -6,8 +6,20 @@ from django.contrib.auth.decorators import login_required
 import datetime as dt
 
 
+
+
+def landing(request):
+    '''display navigation options and pick a neighbourhood to join
+
+    Arguments:
+        request {[type]} -- [description]
+    '''
+    
+    return render(request, 'main/landing.html', {})
+
+
 def index(request):
-    '''display introduction page
+    '''display navigation options and pick a neighbourhood to join
 
     Arguments:
         request {[type]} -- [description]
@@ -16,7 +28,7 @@ def index(request):
     return render(request, 'main/index.html', {})
 
 
-
+@login_required(login_url='/accounts/login/')
 def edit_profile(request):
     '''display edit profile form
 
@@ -27,6 +39,7 @@ def edit_profile(request):
     return render(request, 'main/edit_profile.html', {})
 
 
+@login_required(login_url='/accounts/login/')
 def user_profile(request):
     '''display user profile info
 
