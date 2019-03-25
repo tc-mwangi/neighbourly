@@ -23,8 +23,8 @@ class Hood(models.Model):
     '''
     name = models.CharField(max_length=50, blank=True, default="e.g Karen, Kikuyu, Ngong, Limuru etc")
     # location = models.CharField(max_length=6, choices= locations, blank=True)
-    member = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    member_count = models.IntegerField(default=0, blank=True)
+    member = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    member_count = models.IntegerField(default=0, null=True)
     police_details = HTMLField(blank=True)
     health_details = HTMLField(blank=True)
 
@@ -80,34 +80,31 @@ class Business(models.Model):
     name = models.CharField(max_length=30)
     description = HTMLField(blank=True)
     email = models.EmailField(max_length=70, blank=True)
-    biz_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    biz_hood = models.ForeignKey(
+    business_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    business_hood = models.ForeignKey(
     Hood, on_delete=models.CASCADE, related_name='business', null=True)
 
     objects = models.Manager()
 
     @classmethod
     def search_by_name(cls, search_term):
-        businesses = cls.objects.filter(name__icontains=search_term)
-        return businesses
+        business = cls.objects.filter(name__icontains=search_term)
+        return business
 
     @classmethod
-    def get_neighborhood_businesses(cls, neighborhood_id):
-        businesses = Business.objects.filter(neighborhood_id=id)
-        return businesses
+    def get_neighborhood_businesses(cls, hood_id):
+        business = Business.objects.filter(hood_id=id)
+        return business
 
     @classmethod
-    def get_hood_biz(cls, biz_hood):
-        businesses = Business.objects.filter(biz_hood_pk=biz_hood)
-        return businesses
+    def get_hood_biz(cls, business_hood):
+        business = Business.objects.filter(business_hood_pk=biz_hood)
+        return business
 
     @classmethod
     def get_profile_businesses(cls, profile):
-        businesses = Business.objects.filter(biz_owner__pk=profile)
-        return businesses
-
-
-
+        business = Business.objects.filter(biz_owner__pk=profile)
+        return business
 
 
 class UpdateHood(models.Model):
@@ -125,6 +122,8 @@ class UpdateHood(models.Model):
     def __str__(self):
         return self.user_id
 
+
+
 class Profile(models.Model):
     '''creates instances of user profiles
     
@@ -135,7 +134,7 @@ class Profile(models.Model):
         [type] -- [description]
     '''
 
-    user = models.OneToOneField(User,on_delete=models.CASCADE,blank=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,null=True)
     avatar = models.ImageField(upload_to='avatar/', null=True)
     bio = models.TextField(max_length=255)
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
@@ -174,39 +173,6 @@ class Profile(models.Model):
     class Meta:
         ordering = ['user']
 
-
-class Business(models.Model):
-    '''creates instances of businesses listed in a neighbourhood
-    
-    Arguments:
-        models {[type]} -- [description]
-    '''
-    name = models.CharField(max_length=50, null=True)
-    hood = models.ForeignKey(Hood, null=True)
-    occupant = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    
-   
-
-
-    def __str__(self):
-        return self.name
-
-    def create_business(self):
-        self.save()
-
-    def delete_business(self):
-        self.delete()
-
-    
-    @classmethod
-    def search_business(cls,business_id):
-        business= cls.objects.filter(id=business_id)
-        return business
-        
-    @classmethod
-    def update_business(cls):
-        occupants= cls.objects.get_all()
-        return occupants
 
 
 

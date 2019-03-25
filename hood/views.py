@@ -47,7 +47,7 @@ def user_profile(request):
     Arguments:
         request {[type]} -- [description]
     '''
-    form = ProfileForm
+    form = EditProfileForm
 
     return render(request, 'main/profile.html', {"form":form})
 
