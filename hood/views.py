@@ -62,7 +62,39 @@ def user_profile(request, username):
     return render(request, 'main/profile.html', {'title': title, 'profile': profile, 'profile_info': profile_info, 'business': business})
 
 
+@login_required(login_url='/accounts/login/')
+def join(request, hood_id):
+    '''
+    This view function will implement adding 
+    '''
+    hood = Hood.objects.get(pk=hood_id)
+    if Join.objects.filter(user_id=request.user).exists():
 
+        Join.objects.filter(user_id=request.user).update(hood_id=hood)
+    else:
+
+        Join(user_id=request.user, hood_id=hood).save()
+
+    return redirect('index')
+
+
+@login_required(login_url='/accounts/login/')
+def add(request):
+
+    current_user = request.user
+
+
+    if request.method == 'POST':
+        form = ChangeHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.user_profile = current_user
+            hood.save()
+        return redirect('index')
+
+    else:
+        form = ChangeHoodForm()
+    return render(request, 'main/add.html', {"form": form})
 
 
 
@@ -109,17 +141,22 @@ def hood_listing(request):
 
     return render(request, 'main/hood_listing.html', {})
 
+
+
 def hood_info(request):
-    '''display search neighbourhood businesses form
-
-    Arguments:
-        request {[type]} -- [description]
-    '''
-
-    return render(request, 'main/hood_info.html', {})
-
-
-
+    if request.user.is_authenticated:
+        if Join.objects.filter(user_id=request.user).exists():
+            hood = Hood.objects.get(pk=request.user.join.hood_id.id)
+            posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
+            business = Business.objects.filter(
+                business_hood=request.user.join.hood_id.id)
+            return render(request, 'current_hood.html', {"hood": hood, "business": business, "posts": posts})
+        else:
+            hoods = Hood.get_all_hoods()
+            return render(request, 'main/index.html', {"hoods": hoods})
+    else:
+        hoods = Hood.get_all_hoods()
+        return render(request, 'main/index.html', {"hoods": hoods})
 
 
 

@@ -97,7 +97,7 @@ class Business(models.Model):
         return business
 
     @classmethod
-    def get_hood_biz(cls, business_hood):
+    def get_hood_business(cls, business_hood):
         business = Business.objects.filter(business_hood_pk=biz_hood)
         return business
 
@@ -142,7 +142,7 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        return self.username
+        return self.user
 
     def save_profile(self):
         self.save()
