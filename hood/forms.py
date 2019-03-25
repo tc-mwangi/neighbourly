@@ -11,7 +11,7 @@ class EditProfileForm(forms.Form):
 class ChangeHoodForm(forms.ModelForm):
     class Meta:
         model = Hood
-        exclude = ['user_profile', 'profile']    
+        exclude = ['member', 'user_profile', 'profile', ]    
 
 
 class PostForm(forms.ModelForm):

@@ -28,7 +28,7 @@ class Hood(models.Model):
     police_details = HTMLField(blank=True)
     health_details = HTMLField(blank=True)
     user_profile = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='hoods', blank=True)
+        User, on_delete=models.CASCADE, related_name='hoods', null=True)
 
 
 
