@@ -5,16 +5,6 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 
-class Admin(models.Model):
-    '''creates instances of neighbourhood locations
-    
-    Arguments:
-        models {[type]} -- [description]
-    '''
-
-    name = models.CharField(max_length=50)
-
-
 class locations(models.Model):
     '''creates instances of neighbourhood locations
     
