@@ -11,19 +11,23 @@ class EditProfileForm(forms.Form):
 class ChangeHoodForm(forms.ModelForm):
     class Meta:
         model = Hood
-        exclude = ['']    
-
-
-class AddBusinessForm(forms.ModelForm):
-    class Meta:
-        model = Business
-        exclude = ['']
+        exclude = ['user_profile', 'profile']    
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Business
         exclude = ['']
+
+    exclude = ['author', 'post_hood']
+
+
+class AddBusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['business_owner', 'business_hood']
+
+
 
 
 
