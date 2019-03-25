@@ -1,5 +1,6 @@
 {%extends 'shared/base.html'%}
 {% load static%}
+{% load staticfiles %}
 
 {%block content%}
 
@@ -50,7 +51,7 @@
                   <i class="lni-users"></i>
                 </div>
                 <div class="services-content">
-                  <h3><a href="#">{{hood.name}}</a></h3>
+                  <h3><a href="#">New Hood</a></h3>
                   <a rel="nofollow" href="{% url 'add'  %}" class="btn btn-common">Add</a>
                 </div>
               </div>

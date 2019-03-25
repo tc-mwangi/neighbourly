@@ -21,7 +21,7 @@ class Hood(models.Model):
     Arguments:
         models {[type]} -- [description]
     '''
-    name = models.CharField(max_length=50, blank=True, default="e.g Karen, Kikuyu, Ngong, Limuru etc")
+    name = models.CharField(max_length=50, blank=True)
     # location = models.CharField(max_length=6, choices= locations, blank=True)
     member = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     member_count = models.IntegerField(default=0, null=True)

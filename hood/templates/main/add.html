@@ -1,9 +1,45 @@
 {%extends 'shared/base.html'%}
 {% load static%}
+{% load staticfiles %}
+{% load bootstrap4 %}
 
 {%block content%}
 
 {{block.super}}
+
+
+<!-- Hero Area Start -->
+<div id="hero-area" class="hero-area-bg">
+        <div class="container">      
+          <div class="row">
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+              <div class="contents">
+                <h2 class="head-title">Add your Hood</h2>
+                <p>Join an inclusive fun community of neighbours</p>
+                <div class="header-button">
+                        <form action="{%url 'add'%}" method="post" enctype="multipart/form-data">
+                            {%csrf_token%}
+                        
+                            {% bootstrap_form form%}
+                            <input type="submit" class="btn btn-success btn-lg" value="Add Hood">
+                        </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+              <div class="intro-img">
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1540909163456-800870874263?ixlib=rb-1.2.1&auto=format&fit=crop&w=1332&q=80" alt="main image">
+              </div>            
+            </div>
+          </div> 
+        </div> 
+      </div>
+      <!-- Hero Area End -->
+
+    </header>
+    <!-- Header Area wrapper End -->
+
+
 
 
 
