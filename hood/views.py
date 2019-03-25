@@ -103,6 +103,13 @@ def add(request):
 
 
 
+@login_required(login_url='/accounts/login/')
+def leave(request, hood_id):
+
+    if Join.objects.filter(user_id=request.user).exists():
+        Join.objects.get(user_id=request.user).delete()
+        return redirect('index')
+
 
 @login_required(login_url='/accounts/login/')
 def add_business(request):

@@ -11,6 +11,7 @@ urlpatterns=[
     url('^profile/',views.user_profile, name='user_profile'),
     url(r'^join/(\d+)', views.join, name='join'),
     url(r'^add/hood$', views.add, name='add'),
+    url(r'^leave/(\d+)', views.leave, name='leave'),
     url('^post/',views.add_post, name='add_post'),
     url('^add_business/',views.add_business, name='add_business'),
     url('^search/',views.search_business, name='search_business'),
