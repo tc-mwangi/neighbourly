@@ -109,7 +109,7 @@ class Business(models.Model):
         return business
 
 
-class UpdateHood(models.Model):
+class Join(models.Model):
     '''updates user location
     
     Arguments:

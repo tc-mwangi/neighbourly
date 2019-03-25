@@ -1,33 +1,34 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpRequest, HttpResponseForbidden, HttpResponseServerError
-from .models import Hood, Profile, Business, UpdateHood, Post
+from .models import Hood, Profile, Business, Join, Post
 from .forms import EditProfileForm, ChangeHoodForm, AddBusinessForm, PostForm
 from django.contrib.auth.decorators import login_required
 import datetime as dt
 from django.contrib.auth.models import User
 
 
-
-
-
-def landing(request):
-    '''display navigation options and pick a neighbourhood to join
-
-    Arguments:
-        request {[type]} -- [description]
-    '''
-    
-    return render(request, 'main/landing.html', {})
-
-
 def index(request):
-    '''display navigation options and pick a neighbourhood to join
 
-    Arguments:
-        request {[type]} -- [description]
-    '''
-    
-    return render(request, 'main/index.html', {})
+
+    if request.user.is_authenticated:
+        if Join.objects.filter(user_id=request.user).exists():
+
+            hood = Hood.objects.get(pk=request.user.join.hood_id.id)
+
+            posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
+
+            business = Business.objects.filter(
+                business_hood=request.user.join.hood_id.id)
+
+            return render(request, 'main/my_hood.html', {"hood": hood, "business": business, "posts": posts})
+        else:
+            hoods = Hood. get_all_hoods()
+            return render(request, 'index.html', {"hoods": hoods})
+    else:
+        hoods = Hood.all_neighborhoods()
+
+        return render(request, 'main/index.html', {"hoods": hoods})
+
 
 
 @login_required(login_url='/accounts/login/')
@@ -50,6 +51,7 @@ def edit_profile(request):
     return render(request, 'main/edit_profile.html', {"form":form})
 
 
+
 @login_required(login_url='/accounts/login/')
 def user_profile(request, username):
     profile = User.objects.get(username=username)
@@ -62,12 +64,15 @@ def user_profile(request, username):
     return render(request, 'main/profile.html', {'title': title, 'profile': profile, 'profile_info': profile_info, 'business': business})
 
 
+
+
 @login_required(login_url='/accounts/login/')
 def join(request, hood_id):
     '''
     This view function will implement adding 
     '''
     hood = Hood.objects.get(pk=hood_id)
+
     if Join.objects.filter(user_id=request.user).exists():
 
         Join.objects.filter(user_id=request.user).update(hood_id=hood)
