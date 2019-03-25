@@ -78,8 +78,21 @@ class Hood(models.Model):
         return occupants
 
 
-    
 
+class UpdateHood(models.Model):
+    '''updates user location
+    
+    Arguments:
+        models {[type]} -- [description]
+    
+    Returns:
+        [type] -- [description]
+    '''
+    user_id = models.OneToOneField(User)
+    hood_id = models.ForeignKey(Hood)
+
+    def __str__(self):
+        return self.user_id
 
 class Profile(models.Model):
     '''creates instances of user profiles
