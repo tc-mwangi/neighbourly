@@ -1,4 +1,5 @@
 {% load static %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,15 +39,16 @@
 
   <body>
     <!-- Header Area wrapper Starts -->
+    
     <header id="header-wrap">
       <!-- Navbar Start -->
       {%include 'shared/navigation.html'%}
       <!-- Navbar End -->
+    </header>
+    {% block content%}
 
     
-    <!-- Footer Section Start -->
-    {%include 'shared/footer.html'%}   
-    <!-- Footer Section End -->
+  
 
     <!-- Go to Top Link -->
     <a href="#" class="back-to-top">
@@ -58,6 +60,14 @@
       <div class="loader" id="loader-1"></div>
     </div>
     <!-- End Preloader -->
+    {% endblock %}
+
+      <!-- Footer Section Start -->
+      {%include 'shared/footer.html'%}   
+      <!-- Footer Section End -->
+      
+  
+      
     
     {% block scripts %}
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
-          <a href="{% url 'index' %}" class="navbar-brand"><img src="{%static 'logo.png'%}" alt="hood"></a>       
+          <a href="{% url 'index' %}" class="navbar-brand"><img src="{%static 'logo.png'%}" alt="hood" height="20" width="100"></a>       
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
           </button>
@@ -30,8 +30,8 @@
               </li>
               {% endif %}
               <li class="nav-item">
-                <a class="nav-link" href="#pricing">
-                  Pricing
+                <a class="nav-link" href="{% url 'hood_thread' %}">
+                  Thread
                 </a>
               </li>
               <li class="nav-item">

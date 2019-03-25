@@ -1,0 +1,120 @@
+{%extends 'shared/base.html'%}
+{% load static%}
+
+{%block content%}
+
+{{block.super}}
+
+    <!-- Testimonial Section Start -->
+    <section id="testimonial" class="testimonial section-padding">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div id="testimonials" class="owl-carousel wow fadeInUp" data-wow-delay="1.2s">
+                    <!-- Hoods   -->
+                    <div class="item">
+                      <div class="testimonial-item">
+                        <div class="img-thumb">
+                          <img src="{%static 'images/karen.png'%}" alt="karen">
+                        </div>
+                        <div class="info">
+                          <h2><a href="">Karen</a></h2>
+                          <h3><a href=""></a></h3>
+                        </div>
+                        <div class="content">
+                          <p class="description">Karen is a suburb of Nairobi in Kenya, lying south west of Nairobi central business district. The suburb of Karen borders the ngong Forest and is home to the Ngong Racecourse.</p> 
+                          <br>
+                          <a rel="nofollow" href="{%url 'edit_profile'%}" class="btn btn-common">Join</a>    
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="testimonial-item">
+                        <div class="img-thumb">
+                          <img src="{%static 'images/ngong.png'%}" alt="">
+                        </div>
+                        <div class="info">
+                          <h2><a href="">Ngong</a></h2>
+                          <h3><a href=""></a></h3>
+                        </div>
+                        <div class="content">
+                          <p class="description">
+                            Ngong is a town near the Ngong Hills along the Great Rift Valley within Kajiado County, located in the southwest of Nairobi, in southern Kenya.</p>
+                            <br>
+                          <a rel="nofollow" href="{%url 'edit_profile'%}" class="btn btn-common">Join</a>   
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="testimonial-item">
+                        <div class="">
+                          <img src="{%static 'images/limuru.png'%}" alt="limuru">
+                        </div>
+                        <div class="info">
+                          <h2><a href="#">Limuru</a></h2>
+                          <h3><a href="#"></a></h3>
+                        </div>
+                        <div class="content">
+                          <p class="description">Limuru is a town in central Kenya. It is also the name of a parliamentary constituency and an administrative division.</p>
+                          <br>
+                          <a rel="nofollow" href="{%url 'edit_profile'%}" class="btn btn-common">Join</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="testimonial-item">
+                        <div class="img-thumb">
+                          <img src="{%static 'images/kikuyu.png'%}" alt="kikuyu">
+                        </div>
+                        <div class="info">
+                          <h2><a href="#">Kikuyu</a></h2>
+                          <h3><a href="#"></a></h3>
+                        </div>
+                        <div class="content">
+                          <p class="description">Kikuyu is a town in Kiambu County, Kenya, which grew from a settlement of colonial missionaries. The town is located about 20 km northwest of central Nairobi.</p>    
+                          <br>
+                          <a rel="nofollow" href="{%url 'edit_profile'%}" class="btn btn-common">Join</a>               
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      
+          <!-- Testimonial Section End -->
+
+
+
+
+{%endblock%}
+
+
+
+<!-- Hero Area Start -->
+<div id="hero-area" class="hero-area-bg">
+        <div class="container">      
+          <div class="row">
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+              <div class="contents">
+                <h2 class="head-title">HOOD</h2>
+                <p>Join an inclusive fun community of neighbours</p>
+                <div class="header-button">
+                  
+                  <a href="" class="btn btn-border video-popup">Join</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+              <div class="intro-img">
+                <img class="img-fluid" src="{% static 'images/nation.jpg' %}" alt="main image">
+              </div>            
+            </div>
+          </div> 
+        </div> 
+      </div>
+      <!-- Hero Area End -->
+
+    </header>
+    <!-- Header Area wrapper End -->

@@ -11,6 +11,7 @@ urlpatterns=[
     url('^profile/',views.user_profile, name='user_profile'),
     url('^search/',views.search_business, name='search_business'),
     url('^listing/', views.business_listing, name='business_listing'),
+    url('^hoods/$', views.hood_listing, name='hood_listing'),
     url('^hood/info$', views.hood_info, name='hood_info'),
     url('^hood/thread$', views.hood_thread, name='hood_thread'),
     url('^feed/',views.feed, name='feed'),

@@ -71,6 +71,15 @@ def business_listing(request):
 
     return render(request, 'main/business_listing.html', {})
 
+def hood_listing(request):
+    '''displays neighbourhood listings
+
+    Arguments:
+        request {[type]} -- [description]
+    '''
+    
+
+    return render(request, 'main/hood_listing.html', {})
 
 def hood_info(request):
     '''display search neighbourhood businesses form
