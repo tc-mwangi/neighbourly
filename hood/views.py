@@ -36,8 +36,17 @@ def edit_profile(request):
     Arguments:
         request {[type]} -- [description]
     '''
-
-    return render(request, 'main/edit_profile.html', {})
+    current_user = request.user
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+        return redirect('user_profile')
+    else:
+        form = EditProfileForm()
+    return render(request, 'main/edit_profile.html', {"form":form})
 
 
 @login_required(login_url='/accounts/login/')
@@ -47,9 +56,21 @@ def user_profile(request):
     Arguments:
         request {[type]} -- [description]
     '''
-    form = EditProfileForm
+    
 
-    return render(request, 'main/profile.html', {"form":form})
+    return render(request, 'main/profile.html', {})
+
+
+@login_required(login_url='/accounts/login/')
+def add_business(request):
+    '''display user profile info
+
+    Arguments:
+        request {[type]} -- [description]
+    '''
+    form = AddBusinessForm
+
+    return render(request, 'main/add_business.html', {"form":form})
 
 
 def search_business(request):
@@ -58,9 +79,9 @@ def search_business(request):
     Arguments:
         request {[type]} -- [description]
     '''
-    form = SearchForm
+    
 
-    return render(request, 'main/search.html', {"form":form})
+    return render(request, 'main/search.html', {})
 
 
 def business_listing(request):

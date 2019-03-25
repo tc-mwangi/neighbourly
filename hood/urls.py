@@ -9,6 +9,7 @@ urlpatterns=[
     url('^home/$',views.index, name='index'),
     url('^edit/',views.edit_profile, name='edit_profile'),
     url('^profile/',views.user_profile, name='user_profile'),
+    url('^add_business/',views.add_business, name='add_business'),
     url('^search/',views.search_business, name='search_business'),
     url('^listing/', views.business_listing, name='business_listing'),
     url('^hoods/$', views.hood_listing, name='hood_listing'),
