@@ -1,18 +1,35 @@
 from django import forms
-from .models import Hood, Profile, Business
+from .models import Hood, Profile, Business, locations
 
 
-class ProfileForm(forms.Form):
-    your_name =forms.CharField(label='First Name', max_length=30)
-    email=forms.EmailField(label='Email')
+class EditProfileForm(forms.Form):
+    class Meta:
+        model= Profile
+        exclude =['user']
 
 
-class BusinessForm(forms.ModelForm):
+class ChangeHoodForm(forms.ModelForm):
+    class Meta:
+        model = Hood
+        exclude = ['']    
+
+
+class AddBusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        exclude = ['editor', 'pub_date']
-        widgets = {
-            'tags': forms.CheckboxSelectMultiple(),
-        }
+        exclude = ['']
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['']
+
+
+
+        
+
+
+
 
 

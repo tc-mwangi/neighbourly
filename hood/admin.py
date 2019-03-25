@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import locations, Police, Health, Hood, Profile, Business
 
 
 admin.site.register(locations)

@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 
+
+
 class locations(models.Model):
     '''creates instances of neighbourhood locations
     
@@ -89,11 +91,11 @@ class Profile(models.Model):
         [type] -- [description]
     '''
 
-    occupant = models.OneToOneField(User,on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,blank=True)
     avatar = models.ImageField(upload_to='avatar/', null=True)
     bio = models.TextField(max_length=255)
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
-    email = models.EmailField()
+    email = models.EmailField(max_length=100, blank=True)
 
 
     def __str__(self):
@@ -106,14 +108,27 @@ class Profile(models.Model):
         self.delete()
 
     @classmethod
-    def get_user_profile(cls,user_id):
-        user_profile = cls.objects.filter(user=user_id)
-        return user_profile
+    def get_user_profile(cls,id):
+        profile = Profile.objects.get(user=id)
+        return profile
 
+    @classmethod
+    def get_all_profiles(cls):
+        profile = Profile.objects.all()
+        return profile
 
+    @classmethod
+    def find_a_profile(cls, search_term):
+        profile = Profile.objects.filter(user__username__icontains=search_term)
+        return profile
 
+    @classmethod
+    def filter_by_id(cls, id):
+        profile = Profile.objects.filter(user=id).first()
+        return profile
 
-
+    class Meta:
+        ordering = ['user']
 
 
 class Business(models.Model):
@@ -144,16 +159,54 @@ class Business(models.Model):
         business= cls.objects.filter(id=business_id)
         return business
         
-
-
     @classmethod
     def update_business(cls):
         occupants= cls.objects.get_all()
         return occupants
 
 
-# indicate which models should be shared
-# class Pin(Activity, models.Model):
+
+class Post(models.Model):
+    '''create post instances
+    
+    Arguments:
+        models {[type]} -- [description]
+    
+    Returns:
+        [type] -- [description]
+    '''
+
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='images/', blank=True)
+    content = HTMLField(blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post_hood = models.ForeignKey(
+        Hood, on_delete=models.CASCADE, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+
+    @classmethod
+    def get_hood_posts(cls, post_hood):
+        posts = Post.objects.filter(post_hood=id)
+        return posts
+
+    @classmethod
+    def search_post(cls, search_term):
+        posts = cls.objects.filter(name__icontains=search_term)
+        return posts  
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        posts = cls.objects.filter(name__icontains=search_term)
+        return posts
+
+    @classmethod
+    def get_all_posts(cls,id):
+        posts = Post.objects.all()
+        return posts
+
+
+
     
 
 
