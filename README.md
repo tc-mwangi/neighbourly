@@ -70,4 +70,10 @@ Then visit http://localhost:8000 to view the app.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for 
+
+
+## Photo Credits
+
+* **Mutua Matheka** - [Mutu Matheka](http://mutuamatheka.co.ke/)
+* **Unsplash** - [Unsplash](https://unsplash.com/)
