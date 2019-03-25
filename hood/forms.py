@@ -1,5 +1,5 @@
 from django import forms
-from .models import Hood, Profile, Business, locations
+from .models import Hood, Profile, Business, UpdateHood, Post
 
 
 class EditProfileForm(forms.Form):

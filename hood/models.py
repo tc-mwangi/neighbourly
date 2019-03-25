@@ -7,37 +7,12 @@ from tinymce.models import HTMLField
 
 
 
-class locations(models.Model):
-    '''creates instances of neighbourhood locations
-    
-    Arguments:
-        models {[type]} -- [description]
-    '''
-
-    name = models.CharField(max_length=50)
-
-
-class Police(models.Model):
-    '''creates instances of neighbourhood locations
-    
-    Arguments:
-        models {[type]} -- [description]
-    '''
-
-    name = models.CharField(max_length=50)
-
-
-class Health(models.Model):
-    '''creates instances of neighbourhood locations
-    
-    Arguments:
-        models {[type]} -- [description]
-    '''
-
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    number = models.IntegerField()
-    box = models.TextField()
+# locations = (
+#     ('Karen', 'Karen'),
+#     ('Kikuyu', 'Kikuyu'),
+#     ('Ngong', 'Ngong'),
+#     ('Limuru', 'Limuru'),
+# )
 
 
 class Hood(models.Model):
@@ -46,36 +21,92 @@ class Hood(models.Model):
     Arguments:
         models {[type]} -- [description]
     '''
-    name = models.CharField(max_length=50, null=True)
-    location = models.ForeignKey(locations, null=True)
-    occupant = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    police_details = models.ForeignKey(Police)
-    health_details = models.ForeignKey(Health)
-    admin = models.ForeignKey(Admin, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=50, blank=True, default="e.g Karen, Kikuyu, Ngong, Limuru etc")
+    # location = models.CharField(max_length=6, choices= locations, blank=True)
+    member = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    member_count = models.IntegerField(default=0, blank=True)
+    police_details = HTMLField(blank=True)
+    health_details = HTMLField(blank=True)
+
 
 
     def __str__(self):
         return self.name
 
-    def create_hood(self):
+    def save_hood(self):
         self.save()
 
     def delete_hood(self):
         self.delete()
 
-    def update_hood(self):
-        self.update()
-
     
     @classmethod
-    def find_hood(hood_id):
+    def find_a_hood(hood_id):
         hood = Hood.objects.filter(id=hood_id)
         return hood
 
     @classmethod
-    def update_occupants(cls):
+    def get_all_occupants(cls):
         occupants= cls.objects.get_all()
         return occupants
+
+    @classmethod
+    def search_neighborhood_by_name(cls, search_term):
+        hood = cls.objects.filter(name__icontains=search_term)
+        return hood
+
+    @classmethod
+    def hood_by_id(cls, id):
+        hood = Hood.objects.filter(id=id)
+        return hood
+
+    @classmethod
+    def get_all_hoods(cls):
+        hood = cls.objects.all()
+        return hood
+
+    @classmethod
+    def get_neighborhood_by_id(cls, id):
+        hood = Hood.objects.filter(id=Hood.id)
+        return hood
+
+    @classmethod
+    def get_all_profiles(cls):
+        profile = Profile.objects.all()
+        return profile
+
+
+class Business(models.Model):
+    name = models.CharField(max_length=30)
+    description = HTMLField(blank=True)
+    email = models.EmailField(max_length=70, blank=True)
+    biz_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    biz_hood = models.ForeignKey(
+    Hood, on_delete=models.CASCADE, related_name='business', null=True)
+
+    objects = models.Manager()
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        businesses = cls.objects.filter(name__icontains=search_term)
+        return businesses
+
+    @classmethod
+    def get_neighborhood_businesses(cls, neighborhood_id):
+        businesses = Business.objects.filter(neighborhood_id=id)
+        return businesses
+
+    @classmethod
+    def get_hood_biz(cls, biz_hood):
+        businesses = Business.objects.filter(biz_hood_pk=biz_hood)
+        return businesses
+
+    @classmethod
+    def get_profile_businesses(cls, profile):
+        businesses = Business.objects.filter(biz_owner__pk=profile)
+        return businesses
+
+
 
 
 
@@ -193,8 +224,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='images/', blank=True)
     content = HTMLField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    post_hood = models.ForeignKey(
-        Hood, on_delete=models.CASCADE, null=True)
+    post_hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
 

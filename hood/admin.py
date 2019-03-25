@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import locations, Police, Health, Hood, Profile, Business
+from .models import Hood, Profile, Business, UpdateHood, Post
 
 
-admin.site.register(locations)
-admin.site.register(Police)
-admin.site.register(Health)
+
 admin.site.register(Hood)
 admin.site.register(Profile)
 admin.site.register(Business)
+admin.site.register(UpdateHood)
+admin.site.register(Post)
 
 
