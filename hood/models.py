@@ -5,16 +5,6 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 
-
-
-# locations = (
-#     ('Karen', 'Karen'),
-#     ('Kikuyu', 'Kikuyu'),
-#     ('Ngong', 'Ngong'),
-#     ('Limuru', 'Limuru'),
-# )
-
-
 class Hood(models.Model):
     '''creates instances of neighbourhoods
     
