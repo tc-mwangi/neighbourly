@@ -39,6 +39,7 @@ def edit_profile(request):
         request {[type]} -- [description]
     '''
     current_user = request.user
+    
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -49,6 +50,8 @@ def edit_profile(request):
     else:
         form = EditProfileForm()
     return render(request, 'main/edit_profile.html', {"form":form})
+
+
 
 
 
@@ -113,14 +116,26 @@ def leave(request, hood_id):
 
 @login_required(login_url='/accounts/login/')
 def add_business(request):
-    '''display user profile info
+    '''adds business to a neighbourhood
 
     Arguments:
         request {[type]} -- [description]
     '''
-    form = AddBusinessForm
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddBusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            biz = form.save(commit=False)
+            biz.biz_owner = current_user
+            biz.biz_hood = request.user.join.hood_id
+            biz.save()
+        return redirect('index')
+
+    else:
+        form = AddBusinessForm()
 
     return render(request, 'main/add_business.html', {"form":form})
+
 
 
 def search_business(request):
@@ -132,6 +147,63 @@ def search_business(request):
     
 
     return render(request, 'main/search.html', {})
+
+
+def hood_info(request):
+    if request.user.is_authenticated:
+        if Join.objects.filter(user_id=request.user).exists():
+            hood = Hood.objects.get(pk=request.user.join.hood_id.id)
+            posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
+            business = Business.objects.filter(
+                business_hood=request.user.join.hood_id.id)
+            return render(request, 'current_hood.html', {"hood": hood, "business": business, "posts": posts})
+        else:
+            hoods = Hood.get_all_hoods()
+            return render(request, 'main/index.html', {"hoods": hoods})
+    else:
+        hoods = Hood.get_all_hoods()
+        return render(request, 'main/index.html', {"hoods": hoods})
+
+
+
+
+@login_required(login_url='/accounts/login/')
+def add_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.poster = current_user
+            post.post_hood = request.user.join.hood_id
+            post.save()
+        return redirect('index')
+
+    else:
+        form = PostForm()
+    return render(request, 'main/add_post.html', {"form": form})
+
+
+
+
+
+
+
+
+@login_required(login_url='/accounts/login')
+def hood_thread(request):
+    '''displays neighbourhood business listings
+
+    Arguments:
+        request {[type]} -- [description]
+    '''
+    
+
+
+    return render(request, 'main/hood_thread.html', {})
+
+
+
 
 
 def business_listing(request):
@@ -154,57 +226,6 @@ def hood_listing(request):
     return render(request, 'main/hood_listing.html', {})
 
 
-
-def hood_info(request):
-    if request.user.is_authenticated:
-        if Join.objects.filter(user_id=request.user).exists():
-            hood = Hood.objects.get(pk=request.user.join.hood_id.id)
-            posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
-            business = Business.objects.filter(
-                business_hood=request.user.join.hood_id.id)
-            return render(request, 'current_hood.html', {"hood": hood, "business": business, "posts": posts})
-        else:
-            hoods = Hood.get_all_hoods()
-            return render(request, 'main/index.html', {"hoods": hoods})
-    else:
-        hoods = Hood.get_all_hoods()
-        return render(request, 'main/index.html', {"hoods": hoods})
-
-
-
-
-
-
-
-
-@login_required(login_url='/accounts/login')
-def hood_thread(request):
-    '''displays neighbourhood business listings
-
-    Arguments:
-        request {[type]} -- [description]
-    '''
-    
-
-
-    return render(request, 'main/hood_thread.html', {})
-
-
-@login_required(login_url='/accounts/login/')
-def add_post(request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.poster = current_user
-            post.post_hood = request.user.join.hood_id
-            post.save()
-        return redirect('homepage')
-
-    else:
-        form = PostForm()
-    return render(request, 'mail/add_post.html', {"form": form})
 
 
 

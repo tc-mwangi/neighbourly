@@ -6,6 +6,120 @@
 
 {{block.super}}
 
+
+
+
+
+    <!-- Features Section Start -->
+    <section id="features" class="section-padding">
+            <div class="container">
+              <div class="section-header text-center">          
+                <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">{{hood.name}} Base</h2>
+                <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+              </div>
+
+             
+              <div class="row">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                  <div class="content-left">
+                    {% for business in businesses%}
+                    <div class="box-item wow fadeInLeft" data-wow-delay="0.3s">
+                      <span class="icon">
+                        <i class="lni-rocket"></i>
+                      </span>
+                      <div class="text">
+                        <h4>Bootstrap 4 Based</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                      </div>
+                    </div>
+                    {% empty %}
+
+                    <div class="box-item wow fadeInLeft" data-wow-delay="0.6s">
+                      <span class="icon">
+                        <i class="lni-laptop-phone"></i>
+                      </span>
+                      <div class="text">
+                        <h4>Add a Business</h4>
+                        <a rel="nofollow" href="{% url 'add_business'  %}" class="btn btn-common">Post a business</a>
+                      </div>
+                    </div>
+                    {% endfor %}    
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                  <div class="show-box wow fadeInUp" data-wow-delay="0.3s">
+                    <img src="assets/img/feature/intro-mobile.png" alt="">
+                  </div>
+                </div>
+
+
+
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                  <div class="content-right">
+
+                    {% for post in posts%}
+                    <div class="box-item wow fadeInRight" data-wow-delay="0.3s">
+                      <span class="icon">
+                        <i class="lni-leaf"></i>
+                      </span>
+                      <div class="text">
+                        <h4>{{post.name}}</h4>
+                        <p>{{post.content}}</p>
+                        <p>{{post.author}}</p>
+                      </div>
+                    </div>
+                    {% empty %}
+                    <div class="box-item wow fadeInRight" data-wow-delay="0.3s">
+                            <span class="icon">
+                              <i class="lni-leaf"></i>
+                            </span>
+                            <div class="text">
+                              <h4>Add a Post</h4>
+                              <!-- <p>Looks like your're the first here. Send a shout out to your neighbours</p> -->
+                              <a rel="nofollow" href="{% url 'add_post'  %}" class="btn btn-common">Post</a>
+                            </div>
+                          </div>
+
+
+                    {% endfor %}
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Features Section End -->   
+
+          {% for post in posts%}
+          <h3>{{post.name}}</h3>
+          <p id="text" style="margin-bottom:0;">By <a style="width:100%; padding-left:10px;" href="{% url 'user_profile' username=post.poster %}">
+                  <label>{{post.poster}}</label></a></p>
+      
+          {% empty %}
+          <h4>No posts :-(
+              <br>
+              <a style="color:#4fc3f7;" href="{% url 'add_post'  %}">Create one!</a></h4>
+      
+          {% endfor %}
+      
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h3>Hood: {{hood.name}}</h3>
 <h3>Hood: {{hood.police_details}}</h3>
 <h3>Hood: {{hood.health_details}}</h3>
@@ -13,12 +127,10 @@
 <h5 id="text" class="card-title">Occupants: {{hood.member_count | upper}}</h5>
 
 
-<a href="{% url 'business_listing'  %}" class="btn btn-sm btn-success">Add Business</a>
 
-<a href="{% url 'add_post'  %}" class="btn btn-sm btn-success">Add Post</a>
-<a href="{% url 'leave' hood.id  %}" class="btn btn-sm btn-danger">Leave {{hood.name}}</a>
-
-
+</br><a rel="nofollow" href="{% url 'business_listing'  %}" class="btn btn-common">Post a business</a>
+</br><a rel="nofollow" href="{% url 'add_post'  %}" class="btn btn-common">Add Post</a>
+</br><a rel="nofollow" href="{% url 'leave' hood.id  %}" class="btn btn-common">Leave {{hood.name}}</a>
 
 <h2>Businesses in {{hood.name}} </h2>
 <br>

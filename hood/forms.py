@@ -16,10 +16,10 @@ class ChangeHoodForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Business
-        exclude = ['']
+        model = Post
+        exclude = ['author', 'post_hood']
 
-    exclude = ['author', 'post_hood']
+    
 
 
 class AddBusinessForm(forms.ModelForm):

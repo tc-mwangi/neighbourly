@@ -82,6 +82,7 @@ class Business(models.Model):
     name = models.CharField(max_length=30)
     description = HTMLField(blank=True)
     email = models.EmailField(max_length=70, blank=True)
+    phone = models.TextField(max_length=70, blank=True)
     business_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     business_hood = models.ForeignKey(
     Hood, on_delete=models.CASCADE, related_name='business', null=True)
