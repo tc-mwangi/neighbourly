@@ -101,12 +101,12 @@ class Business(models.Model):
 
     @classmethod
     def get_hood_business(cls, business_hood):
-        business = Business.objects.filter(business_hood_pk=biz_hood)
+        business = Business.objects.filter(business_hood_pk=business_hood)
         return business
 
     @classmethod
     def get_profile_business(cls, profile):
-        business = Business.objects.filter(biz_owner__pk=profile)
+        business = Business.objects.filter(business_owner__pk=profile)
         return business
 
 
@@ -154,12 +154,12 @@ class Profile(models.Model):
         self.delete()
 
     @classmethod
-    def get_user_profile(cls,id):
+    def get_profile(cls,id):
         profile = Profile.objects.get(user=id)
         return profile
 
     @classmethod
-    def get_all_profiles(cls):
+    def get_all(cls):
         profile = Profile.objects.all()
         return profile
 
@@ -175,8 +175,6 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ['user']
-
-
 
 
 class Post(models.Model):

@@ -6,41 +6,96 @@
 
 {{block.super}}
 
-    <!-- Contact Section Start -->
-    <section id="contact" class="section-padding bg-gray">    
-            <div class="container">
-              <div class="section-header text-center">          
-                <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Welcome</h2>
-                <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
-              </div>
-              <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.3s">   
-                <div class="col-lg-7 col-md-12 col-sm-12">
-          <!-- Call To Action Section Start -->
-          <section id="cta" class="section-padding">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-md-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">           
-                  <div class="cta-text">
-                    <h4>Welcome user</h4>
-                    <h5>user bio</h5>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-12 text-right wow fadeInRight" data-wow-delay="0.3s">
-                  </br><a rel="nofollow" href="{% url 'edit_profile'%}" class="btn btn-common">Update Profile</a><br>
-                </br><a rel="nofollow" href="{%url 'add_business' %}" class="btn btn-common">Add a business</a>
-                </div>
-              </div>
-            </div>
-          </section>
-          <!-- Call To Action Section Start -->
-                </div>
-                <div class="col-lg-5 col-md-12 col-xs-12">
-                  <div class="map">
-                    <object style="border:0; height: 280px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d34015.943594576835!2d-106.43242624069771!3d31.677719472407432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86e75d90e99d597b%3A0x6cd3eb9a9fcd23f1!2sCourtyard+by+Marriott+Ciudad+Juarez!5e0!3m2!1sen!2sbd!4v1533791187584"></object>
-                  </div>
-                </div>
-              </div>
-            </div> 
-          </section>
-          <!-- Contact Section End -->
-{%endblock%}      
+
+
+
+            <!-- Contact Section Start -->
+            <section id="contact" class="section-padding bg-gray">    
+                    <div class="container">
+                      <div class="section-header text-center">          
+                        <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Welcome{{profile_details.user | upper}}</h2>
+                        <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+                      </div>
+                      <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.3s">   
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                  <!-- Call To Action Section Start -->
+                  <section id="cta" class="section-padding">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">           
+                          <div class="cta-text">
+                            <h4>Welcome user</h4>
+                            <h5>user bio</h5>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-12 text-right wow fadeInRight" data-wow-delay="0.3s">
+                          </br><a rel="nofollow" href="{% url 'edit_profile'%}" class="btn btn-common">Update Profile</a><br>
+                        </br><a rel="nofollow" href="{%url 'add_business' %}" class="btn btn-common">Add a business</a>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <!-- Call To Action Section Start -->
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-xs-12">
+                          <div class="map">
+                                <img class="rounded-circle img-responsive" width="170" height="170" src="{{profile_details.avatar.url}}" size="">
+                          </div>
+                        </div>
+                      </div>
+                    </div> 
+                  </section>
+                  <!-- Contact Section End -->
+
+
+
+        {%endblock%}  
+
+
+
+
+
+
+
+
+
+
+
+          <img class="rounded-circle img-responsive" width="170" height="170" src="{{profile_details.avatar.url}}" size="">
+          <br>
+
+
+          <br>
+
+          <p id="text" style="width:100%; padding-left:6px;">{{profile_details.user | upper}}</p>
+
+
+          <div style="width:100%; padding-left:20px;padding-top:10px;" class="row">
+
+            <p id="text" style="width:100%; padding-left:6px;">{{businesses | length }} businesses</p>
+            <br>
+            <p id="text" style="margin-top:0px;">{{profile_info.bio | safe}}</p>
+
+            <p id="text" style="margin-top:0px;">{{profile_info.contact | safe}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+        {% for business in businesses %}
+        <div class="card">
+          <div class="card-body" style="background-color:#eceff1;">
+            <h5>{{business.name | upper}}</h5>
+            <h5>{{business.description | safe}}</h5>
+            <p>{{business.email }}</p>
+            <p>Location: {{business.business_hood.name}}</p>
+          </div>
+        </div>
+        {% empty %}
+        <div class="row">
+          <h4>Add a business.
+            Register one <a style="color:#4fc3f7;" href="{% url 'add_business'  %}">here</a>
+          </h4>
+        </div>
+        {% endfor %}

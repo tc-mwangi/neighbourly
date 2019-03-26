@@ -8,7 +8,6 @@ urlpatterns=[
     url('^$',views.index, name='index'),
     url('^edit/',views.edit_profile, name='edit_profile'),
     url(r'^user/(?P<username>\w+)', views.user_profile, name='user_profile'),
-    url('^profile/',views.user_profile, name='user_profile'),
     url(r'^join/(\d+)', views.join, name='join'),
     url(r'^add/hood$', views.add, name='add'),
     url(r'^leave/(\d+)', views.leave, name='leave'),

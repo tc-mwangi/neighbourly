@@ -8,24 +8,23 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-
-
     if request.user.is_authenticated:
         if Join.objects.filter(user_id=request.user).exists():
 
-            hood = Hood.objects.get(pk=request.user.join.hood_id.id)
+            hoods = Hood.objects.get(pk=request.user.join.hood_id.id)
 
             posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
 
             business = Business.objects.filter(
                 business_hood=request.user.join.hood_id.id)
 
-            return render(request, 'main/my_hood.html', {"hood": hood, "business": business, "posts": posts})
+            return render(request, 'main/my_hood.html', {"hoods": hoods, "business": business, "posts": posts})
         else:
             hoods = Hood. get_all_hoods()
             return render(request, 'main/index.html', {"hoods": hoods})
     else:
         hoods = Hood. get_all_hoods()
+       
 
         return render(request, 'main/index.html', {"hoods": hoods})
 
@@ -59,12 +58,12 @@ def edit_profile(request):
 def user_profile(request, username):
     profile = User.objects.get(username=username)
     try:
-        profile_info = Profile.get_profile(profile.id)
+        profile_details = Profile.get_profile(profile.id)
     except:
-        profile_info = Profile.filter_by_id(profile.id)
+        profile_details = Profile.filter_by_id(profile.id)
     business = Business.get_profile_business(profile.id)
-    title = f'@{profile.username}'
-    return render(request, 'main/profile.html', {'title': title, 'profile': profile, 'profile_info': profile_info, 'business': business})
+    
+    return render(request, 'main/profile.html', {'profile': profile, 'profile_details': profile_details, 'business': business})
 
 
 
