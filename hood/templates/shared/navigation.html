@@ -12,28 +12,15 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index' %}">
-                  Home
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/accounts/login">
-                  Login/Register
-                </a>
-              </li>
+              
               {% if user.is_authenticated %} 
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'user_profile' %}">
                   Profile
                 </a>
               </li>
-              {% endif %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'hood_thread' %}">
-                  Thread
-                </a>
-              </li>
+              
+          
               <li class="nav-item">
                 <a class="nav-link" href="/admin">
                     Admin
@@ -44,10 +31,32 @@
                   Logout
                 </a>
               </li>
+
+              {% else %}
+
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'index' %}">
+                    Home
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/accounts/login">
+                    Login/Register
+                  </a>
+                </li>
+
+
+
+      {% endif %}
             </ul>
           </div>
         </div>
       </nav>
+
+      
+
+
+      
 
 {%endblock%}
 

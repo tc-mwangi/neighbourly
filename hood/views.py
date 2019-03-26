@@ -23,9 +23,9 @@ def index(request):
             return render(request, 'main/my_hood.html', {"hood": hood, "business": business, "posts": posts})
         else:
             hoods = Hood. get_all_hoods()
-            return render(request, 'index.html', {"hoods": hoods})
+            return render(request, 'main/index.html', {"hoods": hoods})
     else:
-        hoods = Hood.all_neighborhoods()
+        hoods = Hood. get_all_hoods()
 
         return render(request, 'main/index.html', {"hoods": hoods})
 
