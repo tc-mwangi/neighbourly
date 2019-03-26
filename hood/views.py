@@ -20,13 +20,38 @@ def index(request):
 
             return render(request, 'main/my_hood.html', {"hoods": hoods, "business": business, "posts": posts})
         else:
+
             hoods = Hood. get_all_hoods()
             return render(request, 'main/index.html', {"hoods": hoods})
+    
     else:
+
         hoods = Hood. get_all_hoods()
        
 
         return render(request, 'main/index.html', {"hoods": hoods})
+
+
+
+@login_required(login_url='/accounts/login')
+def hood_thread(request):
+    '''displays posts and businesses
+
+    Arguments:
+        request {[type]} -- [description]
+    '''
+    if Join.objects.filter(user_id=request.user).exists():
+
+        hoods = Hood.objects.get(pk=request.user.join.hood_id.id)
+
+        posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
+
+        business = Business.objects.filter(
+            business_hood=request.user.join.hood_id.id)
+
+    return render(request, 'main/hood_thread.html', {"hoods": hoods, "business": business, "posts": posts})
+    
+
 
 
 
@@ -78,11 +103,13 @@ def join(request, hood_id):
     if Join.objects.filter(user_id=request.user).exists():
 
         Join.objects.filter(user_id=request.user).update(hood_id=hood)
+    
     else:
 
         Join(user_id=request.user, hood_id=hood).save()
 
     return redirect('index')
+
 
 
 @login_required(login_url='/accounts/login/')
@@ -181,27 +208,6 @@ def add_post(request):
     else:
         form = PostForm()
     return render(request, 'main/add_post.html', {"form": form})
-
-
-
-
-
-
-
-
-@login_required(login_url='/accounts/login')
-def hood_thread(request):
-    '''displays neighbourhood business listings
-
-    Arguments:
-        request {[type]} -- [description]
-    '''
-    
-
-
-    return render(request, 'main/hood_thread.html', {})
-
-
 
 
 

@@ -15,6 +15,9 @@
             <div class="container">
               <div class="section-header text-center">          
                 <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">{{hood.name}} Base</h2>
+                <h3>Hood: {{hood.name}}</h3>
+                <h3>Hood: {{hood.police_details}}</h3>
+                <h3>Hood: {{hood.health_details}}</h3>
                 <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
               </div>
 
@@ -28,7 +31,7 @@
                         <i class="lni-rocket"></i>
                       </span>
                       <div class="text">
-                        <h4>Bootstrap 4 Based</h4>
+                        <h4>{{business.name}}</h4>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                       </div>
                     </div>
@@ -96,78 +99,9 @@
                   <label>{{post.poster}}</label></a></p>
       
           {% empty %}
-          <h4>No posts :-(
-              <br>
-              <a style="color:#4fc3f7;" href="{% url 'add_post'  %}">Create one!</a></h4>
-      
+         There are no posts yet
           {% endfor %}
       
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h3>Hood: {{hood.name}}</h3>
-<h3>Hood: {{hood.police_details}}</h3>
-<h3>Hood: {{hood.health_details}}</h3>
-
-<h5 id="text" class="card-title">Occupants: {{hood.member_count | upper}}</h5>
-
-
-
-</br><a rel="nofollow" href="{% url 'business_listing'  %}" class="btn btn-common">Post a business</a>
-</br><a rel="nofollow" href="{% url 'add_post'  %}" class="btn btn-common">Add Post</a>
-</br><a rel="nofollow" href="{% url 'leave' hood.id  %}" class="btn btn-common">Leave {{hood.name}}</a>
-
-<h2>Businesses in {{hood.name}} </h2>
-<br>
-<div class="card-columns">
-    {% for business in businesses%}
-    <div class="card" style="width:100%;">
-
-
-        <div class="card-body" style="background-color:#eceff1;">
-            <h5>{{business.name | upper}}</h5>
-            <h5>{{business.description | safe}}</h5>
-            <p>{{business.email }}</p>
-        </div>
-    </div>
-
-    {% empty %}
-    <h4>No businesses yet! Register one <a style="color:#4fc3f7;" href="{% url 'business_listing'  %}">here</a></h4>
-
-    {% endfor %}
-
-
-
-    {% for post in posts%}
-    <h3>{{post.name}}</h3>
-    <p id="text" style="margin-bottom:0;">By <a style="width:100%; padding-left:10px;" href="{% url 'user_profile' username=post.poster %}">
-            <label>{{post.poster}}</label></a></p>
-
-    {% empty %}
-    <h4>No posts :-(
-        <br>
-        <a style="color:#4fc3f7;" href="{% url 'add_post'  %}">Create one!</a></h4>
-
-    {% endfor %}
-
-
-
-
 {% endblock %}
 
 
